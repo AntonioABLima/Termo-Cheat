@@ -11,7 +11,6 @@ body {
     font-family: 'Mitr', sans-serif;
     font-weight: 600;
 
-    
 }
 
 html {
@@ -74,4 +73,39 @@ html {
 
 .letter.edit {
     border-bottom: 15px solid #4C4347 !important;
+}
+
+.btn-container{
+    display: grid;
+    align-items: center;
+    grid-gap: 20px;
+
+    grid-template-columns: repeat(2, 1fr);
+
+}
+
+.btn {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    border-radius: 10%;
+    height: 44px;
+    width: 44px;
+    background-color: #615458;
+    cursor: pointer;
+
+}
+
+#addDivButton {
+    color: aquamarine;
+    position: absolute;
+    right: 138px;
+}
+
+#rmvDivButton {
+    color: tomato;
+    position: absolute;
+    right: 138px;
 }
