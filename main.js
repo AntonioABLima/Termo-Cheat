@@ -36,6 +36,7 @@ let lista = [];
 		row.forEach(div => {
 			div.removeEventListener('click', clickHandler);
 		});
+		
 	}
 
 	const row1 = document.querySelectorAll('.letter.empty');
@@ -68,11 +69,41 @@ let lista = [];
 		}
 	}
 
+	
+	function toggleDivClasses(div){
+		// Verifica a classe atual da div clicada e altera para a próxima classe
+		if (div.classList.contains('wrong')) {
+			div.classList.remove('wrong');
+			div.classList.add('place');
+		} else if (div.classList.contains('place')) {
+			div.classList.remove('place');
+			div.classList.add('right');
+		} else if (div.classList.contains('right')) {
+			div.classList.remove('right');
+			div.classList.add('wrong');
+		}
+	}
+
 	addDivButton.addEventListener('click', () => {
 		if(n_row < 5 ){
 			n_row = n_row + 1;
 			moverDivParaNovoPai(document.getElementById('addDivButton'), 'r' + parseInt(n_row + 1));
 			moverDivParaNovoPai(document.getElementById('rmvDivButton'), 'r' + parseInt(n_row));
+			
+			const pre_row =  document.querySelectorAll('#r' + parseInt(n_row - 1) +' .letter');
+			removeClickListenerFromDivs(pre_row);
+			pre_row.forEach(div => {
+				focusedDiv = null;
+
+				div.classList.remove('empty');
+				div.classList.remove("edit");
+				div.classList.add('wrong');
+				div.classList.add('has');
+
+				div.addEventListener('click', () => {
+					toggleDivClasses(div);
+				});
+			});
 
 			const row =  document.querySelectorAll('#r' + n_row +' .letter');
 			row.forEach(div => {
@@ -92,6 +123,19 @@ let lista = [];
 		if(n_row > 0 ){
 			moverDivParaNovoPai(document.getElementById('addDivButton'), 'r' + parseInt(n_row));
 			moverDivParaNovoPai(document.getElementById('rmvDivButton'), 'r' + parseInt(n_row - 1));
+			
+			const pre_row =  document.querySelectorAll('#r' + parseInt(n_row - 1) +' .letter');
+			addClickListenerToDivs(pre_row);
+			pre_row.forEach(div => {
+				div.classList.add('empty');
+				div.classList.remove('has');
+				div.classList.remove('wrong');
+				div.classList.remove('place');
+				div.classList.remove('right');
+
+				div.removeEventListener('click', toggleDivClasses(div));
+			});
+
 			const row =  document.querySelectorAll('#r' + n_row +' .letter');
 			row.forEach(div => {
 				focusedDiv = null;
@@ -112,14 +156,14 @@ let lista = [];
 
 	const printDivsButton = document.getElementById('printDivsButton');
 	printDivsButton.addEventListener('click', () => {
-		const rows =  document.querySelectorAll('.row' +' .letter.empty');
+		const rows =  document.querySelectorAll('.row' +' .letter.has');
 
 		for (let i = 0; i < rows.length; i += 5) {
 			var palavra = ""
 			palavra = rows[i].innerHTML + rows[i+1].innerHTML + rows[i+2].innerHTML + rows[i+3].innerHTML + rows[i+4].innerHTML; 	
-			console.log(lista.includes(palavra));
+			console.log( palavra + lista.includes(palavra));
 		}
 	})
-
 });
+
 
