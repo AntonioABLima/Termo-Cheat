@@ -98,13 +98,13 @@ html {
 
 }
 
-#addDivButton {
+.btnAdd {
     color: aquamarine;
     position: absolute;
     right: 138px;
 }
 
-#rmvDivButton {
+.btnRmv {
     color: tomato;
     position: absolute;
     right: 138px;
