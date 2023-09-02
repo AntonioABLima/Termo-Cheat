@@ -75,15 +75,15 @@ html {
     border-bottom: 15px solid #4C4347 !important;
 }
 
-.letter.wrong{
+.wrong{
     background-color: #312a2c;
 }
 
-.letter.place{
+.place{
     background-color: #d3ad69;
 }
 
-.letter.right{
+.right{
     background-color: #3aa394;
 }
 
