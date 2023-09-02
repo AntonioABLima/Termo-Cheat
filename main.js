@@ -52,20 +52,46 @@ let lista = [];
 
 	var n_row = 0;
 	const addDivButton = document.getElementById('addDivButton');
+	
+	const rmvDivButton = document.getElementById('rmvDivButton');
+	if(n_row === 0){
+		rmvDivButton.style.pointerEvents = 'none';
+		rmvDivButton.style.opacity = '0';
+	}
+
+	function moverDivParaNovoPai(divParaMover, novoPaiID) {
+		const novoPai = document.getElementById(novoPaiID);
+		if (novoPai) {
+			const antigoPai = divParaMover.parentElement;
+			antigoPai.removeChild(divParaMover);
+			novoPai.appendChild(divParaMover);
+		}
+	}
+
 	addDivButton.addEventListener('click', () => {
 		if(n_row < 5 ){
 			n_row = n_row + 1;
+			moverDivParaNovoPai(document.getElementById('addDivButton'), 'r' + parseInt(n_row + 1));
+			moverDivParaNovoPai(document.getElementById('rmvDivButton'), 'r' + parseInt(n_row));
+
 			const row =  document.querySelectorAll('#r' + n_row +' .letter');
 			row.forEach(div => {
 				div.classList.add('empty');
 			});
 			addClickListenerToDivs(row);
+			rmvDivButton.style.pointerEvents = 'all';
+			rmvDivButton.style.opacity = '1';
 		};
+		if(n_row === 5){
+			addDivButton.style.pointerEvents = 'none';
+			addDivButton.style.opacity = '0';
+		}
 	});
 
-	const rmvDivButton = document.getElementById('rmvDivButton');
 	rmvDivButton.addEventListener('click', () => {
 		if(n_row > 0 ){
+			moverDivParaNovoPai(document.getElementById('addDivButton'), 'r' + parseInt(n_row));
+			moverDivParaNovoPai(document.getElementById('rmvDivButton'), 'r' + parseInt(n_row - 1));
 			const row =  document.querySelectorAll('#r' + n_row +' .letter');
 			row.forEach(div => {
 				focusedDiv = null;
@@ -75,9 +101,14 @@ let lista = [];
 			});
 			n_row = n_row - 1;
 			removeClickListenerFromDivs(row);
+			addDivButton.style.pointerEvents = 'all';
+			addDivButton.style.opacity = '1';
 		};
+		if(n_row === 0){
+			rmvDivButton.style.pointerEvents = 'none';
+			rmvDivButton.style.opacity = '0';
+		}
 	});
-
 
 	const printDivsButton = document.getElementById('printDivsButton');
 	printDivsButton.addEventListener('click', () => {
@@ -89,7 +120,6 @@ let lista = [];
 			console.log(lista.includes(palavra));
 		}
 	})
-
 
 });
 
