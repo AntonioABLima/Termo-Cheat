@@ -75,13 +75,23 @@ html {
     border-bottom: 15px solid #4C4347 !important;
 }
 
+.letter.wrong{
+    background-color: #312a2c;
+}
+
+.letter.place{
+    background-color: #d3ad69;
+}
+
+.letter.right{
+    background-color: #3aa394;
+}
+
 .btn-container{
     display: grid;
     align-items: center;
     grid-gap: 20px;
-
     grid-template-columns: repeat(2, 1fr);
-
 }
 
 .btn {
