@@ -119,3 +119,17 @@ html {
     position: absolute;
     right: 138px;
 }
+
+#printDivsButton{
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    font-size: 76px;
+    border-radius: 10%;
+    height: 80px;
+    width: 80px;
+    background-color: #615458;
+    cursor: pointer;
+}
