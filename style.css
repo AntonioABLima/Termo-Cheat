@@ -1,71 +1,135 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@600&display=swap" rel="stylesheet"> 
-    <title>Termo Cheat</title>
-</head>
-<body>
-    <header>
-        <h1 class="header-h1">Termo Cheat</h1>
-        <h1 class="header-h1"></h1>
+body {
+    background-color: #6e5c62;
+    color: #FAFAFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100% - var(--inset));
+    margin-top: var(--inset);
+    user-select: none;
+    width: 100%;
+    font-family: 'Mitr', sans-serif;
+    font-weight: 600;
 
-    </header>
-    <!-- Conteúdo da sua página aqui -->
-    <div class="grid-container">
-        <div class= "row" id='r0'>
-            <div class="letter empty" id='01'></div>
-            <div class="letter empty" id='02'></div>
-            <div class="letter empty" id='03'></div>
-            <div class="letter empty" id='04'></div>
-            <div class="letter empty" id='05'></div>
-            
-        </div>
-        <div class= "row" id='r1'>
-            <div class="letter" id='11'></div>
-            <div class="letter" id='12'></div>
-            <div class="letter" id='13'></div>
-            <div class="letter" id='14'></div>
-            <div class="letter" id='15'></div>
-            <div class="btn btnAdd" id="addDivButton">+</div>
-            <div class="btn btnRmv" id="rmvDivButton">-</div>
+}
 
-        </div>
-        <div class= "row" id='r2'>
-            <div class="letter "></div>
-            <div class="letter "></div>
-            <div class="letter "></div>
-            <div class="letter "></div>
-            <div class="letter "></div>
-            
-        </div>
-        <div class= "row" id='r3'>
-            <div class="letter"></div>
-            <div class="letter"></div>
-            <div class="letter"></div>
-            <div class="letter"></div>
-            <div class="letter"></div>
+html {
+    line-height: 1.15;
+}
 
-        </div>
-        <div class= "row" id='r4'>
-            <div class="letter"></div>
-            <div class="letter"></div>
-            <div class="letter"></div>
-            <div class="letter"></div>
-            <div class="letter"></div>
-        </div>
-        <div class= "row" id='r5'>
-            <div class="letter"></div>
-            <div class="letter"></div>
-            <div class="letter"></div>
-            <div class="letter"></div>
-            <div class="letter"></div>
-        </div>
-    </div>
-    <div id="printDivsButton">▷</div>
+.header-h1 {
+    font-weight: 600;
+    font-size: 4vh;
+    line-height: 6vh;
+    height: 6vh;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    <script src="main.js"></script>
-</body>
-</html>
+.grid-container {
+    display: grid;
+    height: 505px;
+    width: 420px;
+    grid-gap: 0.0625em;
+    /* background-color: #FAFAFF; */
+}
+
+.row {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 6px;
+    grid-template-columns: repeat(5, 1fr);
+    height: 80px;
+}
+
+
+.letter {
+    aspect-ratio: 1;
+    font-weight: 600;
+    font-family: 'Mitr', sans-serif;
+    color: #FAFAFF;
+    background-color: #615458;
+    border-radius: 10%;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    line-height: 1em;
+    text-transform: uppercase;
+    --happy-jump: 55%;
+    cursor: pointer;
+}
+
+.letter.empty{
+    background-color: transparent;
+    border: 6px solid #4C4347;
+}
+
+.letter.edit {
+    border-bottom: 15px solid #4C4347 !important;
+}
+
+.wrong{
+    background-color: #312a2c;
+}
+
+.place{
+    background-color: #d3ad69;
+}
+
+.right{
+    background-color: #3aa394;
+}
+
+.btn-container{
+    display: grid;
+    align-items: center;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.btn {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    border-radius: 10%;
+    height: 44px;
+    width: 44px;
+    background-color: #615458;
+    cursor: pointer;
+
+}
+
+.btnAdd {
+    color: aquamarine;
+    position: absolute;
+    right: 138px;
+}
+
+.btnRmv {
+    color: tomato;
+    position: absolute;
+    right: 138px;
+}
+
+#printDivsButton{
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    font-size: 76px;
+    border-radius: 10%;
+    height: 80px;
+    width: 80px;
+    background-color: #615458;
+    cursor: pointer;
+}
