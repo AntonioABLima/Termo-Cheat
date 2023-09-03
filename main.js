@@ -69,7 +69,6 @@ let lista = [];
 		}
 	}
 
-	
 	function toggleDivClasses(div){
 		// Verifica a classe atual da div clicada e altera para a próxima classe
 		if (div.classList.contains('wrong')) {
@@ -154,16 +153,130 @@ let lista = [];
 		}
 	});
 
+	function detectColor(div){
+		if(div.classList.contains('wrong')){
+			return 0;
+		}
+		else if(div.classList.contains('place')){
+			return 1;
+		}
+		else if(div.classList.contains('right')){
+			return 2;
+		}
+	}
+
+	function detectYellow(map){
+		let yellow_index_map = []
+		for(let i = 0; i < map.length; i++){
+			if(map[i]  === 1){
+				yellow_index_map.push(i);
+			}
+		}
+
+		return yellow_index_map;
+	}
+
+	function detectGreen(map){
+		let green_index_map = []
+		for(let i = 0; i < map.length; i++){
+			if(map[i]  === 2){
+				green_index_map.push(i);
+			}
+		}
+
+		return green_index_map;
+	}
+
+	function preProcessing(palavra, map, list){
+		let novoArray = list;
+		for (let i = 0; i < palavra.length; i += 1) {
+			if(map[i] === 0){
+				novoArray = novoArray.filter(word => !(word.includes(palavra[i])));
+			}
+
+			if(map[i] === 1 || map[i] === 2){
+				novoArray = novoArray.filter(word => word.includes(palavra[i]));
+			}
+		}
+		return novoArray
+	}
+
+	function yellowProcessing(palavra, map, list){
+		let novoArray = []
+		
+		list.forEach(word => {
+			let flag = 0;
+			for (let i = 0; i < map.length; i += 1) {
+				if(palavra[map[i]] != word[map[i]]){
+					continue;
+				}
+				else{
+					flag = 1;
+				}
+			}
+			if(flag === 0){
+				novoArray.push(word)
+			}
+		})
+		
+		return novoArray
+	}
+
+	function greenProcessing(palavra, map, list){
+		let novoArray = []
+		
+		list.forEach(word => {
+			let flag = 0;
+			for (let i = 0; i < map.length; i += 1) {
+				if(palavra[map[i]] === word[map[i]]){
+					continue;
+				}
+				else{
+					flag = 1;
+				}
+			}
+			if(flag === 0){
+				novoArray.push(word)
+			}
+		})
+		
+		return novoArray
+	}
+
+	let lista_pre_processada = lista;
+	function checaPalavra(rows){
+		for (let i = 0; i < rows.length; i += 5) {
+			let map = [];
+			let palavra = ""
+			palavra = rows[i].innerHTML + rows[i+1].innerHTML + rows[i+2].innerHTML + rows[i+3].innerHTML + rows[i+4].innerHTML; 	
+			map.push(detectColor(rows[i]))
+			map.push(detectColor(rows[i+1]))
+			map.push(detectColor(rows[i+2]))
+			map.push(detectColor(rows[i+3]))
+			map.push(detectColor(rows[i+4]))
+
+			let green_index_map = detectGreen(map)
+			let yellow_index_map = detectYellow(map)
+
+			lista_pre_processada = preProcessing(palavra, map, lista_pre_processada);
+			
+			if(green_index_map.length > 0){
+				lista_pre_processada = greenProcessing(palavra, green_index_map, lista_pre_processada);
+			}
+			if(yellow_index_map.length > 0){
+				lista_pre_processada = yellowProcessing(palavra, yellow_index_map, lista_pre_processada);
+			}
+
+			console.log(lista_pre_processada)
+
+			map.length = 0;
+		}
+	}
+
 	const printDivsButton = document.getElementById('printDivsButton');
 	printDivsButton.addEventListener('click', () => {
 		const rows =  document.querySelectorAll('.row' +' .letter.has');
-
-		for (let i = 0; i < rows.length; i += 5) {
-			var palavra = ""
-			palavra = rows[i].innerHTML + rows[i+1].innerHTML + rows[i+2].innerHTML + rows[i+3].innerHTML + rows[i+4].innerHTML; 	
-			console.log( palavra + lista.includes(palavra));
-		}
+		checaPalavra(rows);
+		lista_pre_processada = lista;
 	})
 });
-
-
