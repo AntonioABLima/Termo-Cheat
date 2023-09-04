@@ -53,13 +53,10 @@ let lista = [];
 
 	var n_row = 0;
 	const addDivButton = document.getElementById('addDivButton');
-	
 	const rmvDivButton = document.getElementById('rmvDivButton');
-	if(n_row === 0){
-		rmvDivButton.style.pointerEvents = 'none';
-		rmvDivButton.style.opacity = '0';
-	}
-
+	rmvDivButton.style.pointerEvents = 'none';
+	rmvDivButton.style.display = 'none';
+	
 	function moverDivParaNovoPai(divParaMover, novoPaiID) {
 		const novoPai = document.getElementById(novoPaiID);
 		if (novoPai) {
@@ -69,20 +66,21 @@ let lista = [];
 		}
 	}
 
-	function toggleDivClasses(div){
+	function toggleDivClasses(){
 		// Verifica a classe atual da div clicada e altera para a próxima classe
-		if (div.classList.contains('wrong')) {
-			div.classList.remove('wrong');
-			div.classList.add('place');
-		} else if (div.classList.contains('place')) {
-			div.classList.remove('place');
-			div.classList.add('right');
-		} else if (div.classList.contains('right')) {
-			div.classList.remove('right');
-			div.classList.add('wrong');
+		if (this.classList.contains('wrong')) {
+			this.classList.remove('wrong');
+			this.classList.add('place');
+		} else if (this.classList.contains('place')) {
+			this.classList.remove('place');
+			this.classList.add('right');
+		} else if (this.classList.contains('right')) {
+			this.classList.remove('right');
+			this.classList.add('wrong');
 		}
 	}
 
+	
 	addDivButton.addEventListener('click', () => {
 		if(n_row < 5 ){
 			n_row = n_row + 1;
@@ -99,9 +97,7 @@ let lista = [];
 				div.classList.add('wrong');
 				div.classList.add('has');
 
-				div.addEventListener('click', () => {
-					toggleDivClasses(div);
-				});
+				div.addEventListener('click', toggleDivClasses);
 			});
 
 			const row =  document.querySelectorAll('#r' + n_row +' .letter');
@@ -110,11 +106,12 @@ let lista = [];
 			});
 			addClickListenerToDivs(row);
 			rmvDivButton.style.pointerEvents = 'all';
-			rmvDivButton.style.opacity = '1';
+			rmvDivButton.style.display = 'flex';
+			
 		};
 		if(n_row === 5){
 			addDivButton.style.pointerEvents = 'none';
-			addDivButton.style.opacity = '0';
+			addDivButton.style.display = 'none';
 		}
 	});
 
@@ -132,7 +129,7 @@ let lista = [];
 				div.classList.remove('place');
 				div.classList.remove('right');
 
-				div.removeEventListener('click', toggleDivClasses(div));
+				div.removeEventListener('click', toggleDivClasses);
 			});
 
 			const row =  document.querySelectorAll('#r' + n_row +' .letter');
@@ -145,11 +142,12 @@ let lista = [];
 			n_row = n_row - 1;
 			removeClickListenerFromDivs(row);
 			addDivButton.style.pointerEvents = 'all';
-			addDivButton.style.opacity = '1';
+			addDivButton.style.display = 'flex';
 		};
 		if(n_row === 0){
 			rmvDivButton.style.pointerEvents = 'none';
-			rmvDivButton.style.opacity = '0';
+			rmvDivButton.style.display = 'none';
+
 		}
 	});
 
@@ -257,6 +255,7 @@ let lista = [];
 
 			let green_index_map = detectGreen(map)
 			let yellow_index_map = detectYellow(map)
+			console.log(yellow_index_map.length)
 
 			lista_pre_processada = preProcessing(palavra, map, lista_pre_processada);
 			
@@ -267,16 +266,40 @@ let lista = [];
 				lista_pre_processada = yellowProcessing(palavra, yellow_index_map, lista_pre_processada);
 			}
 
-			console.log(lista_pre_processada)
+			// console.log(lista_pre_processada)
 
 			map.length = 0;
 		}
+		return lista_pre_processada;
 	}
 
+	const respostas_container = document.getElementById("respostas-container");
+	const respostas_heaging = document.getElementById('respostas-heading');
+	const respostas = document.getElementById("respostas");
 	const printDivsButton = document.getElementById('printDivsButton');
+	
 	printDivsButton.addEventListener('click', () => {
 		const rows =  document.querySelectorAll('.row' +' .letter.has');
-		checaPalavra(rows);
+
+		let lista_resposta = checaPalavra(rows)
+
+		respostas_container.style.display = 'block';
+		respostas_heaging.textContent = 'Total de palavras: ' + lista_resposta.length;
+		let str_final = ""
+		lista_resposta.forEach(word => {
+			str_final = str_final + word + ", ";
+		});
+		respostas.textContent = str_final;
 		lista_pre_processada = lista;
 	})
+
+	const close_resposta = document.getElementById('close-btn');
+	close_resposta.addEventListener('click', () => {
+	
+		respostas_container.style.display = 'none';
+		respostas.textContent = '';
+	});
+
 });
+
+
