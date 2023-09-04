@@ -110,14 +110,18 @@ html {
 
 .btnAdd {
     color: aquamarine;
-    position: absolute;
-    right: 138px;
+    position: relative;
+    left: 430px;
+    top: -68px;
+    z-index: 1;
 }
 
 .btnRmv {
     color: tomato;
-    position: absolute;
-    right: 138px;
+    position: relative;
+    left: 430px;
+    top: -68px;
+    z-index: 1;
 }
 
 #printDivsButton{
@@ -132,4 +136,45 @@ html {
     width: 80px;
     background-color: #615458;
     cursor: pointer;
+}
+
+.respostas-container {
+    position: absolute;
+    display: flex;
+    display: none;
+    height: 800px;
+    width: 600px;
+    z-index: 2;
+    top: 10%;
+    border-radius: 10px;
+    background-color: #615458;
+    overflow: hidden;
+}
+
+.respostas-heading{
+    margin-left: 2%;
+}
+
+.close{
+    display: flex;
+    position: inherit;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    border-radius: 10%;
+    height: 40px;
+    width: 40px;
+    background-color: #615458;
+    cursor: pointer;
+    right: 0px;
+    top: 0%;
+}
+
+.respostas{
+    margin-top: 4%;
+    margin-left: 2%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100%;
 }
