@@ -66,6 +66,7 @@ let text_tratado = [];
 		
 		const currentIndex = Array.from(row).indexOf(focusedDiv);
 		const nextIndex = (currentIndex + 1) % row.length;
+		const previousIndex = (currentIndex - 1 + row.length) % row.length;
 		const nextDivTxt = row[nextIndex].innerHTML
 
 		if (focusedDiv && event.keyCode > 64 && event.keyCode < 91 ) {
@@ -80,7 +81,22 @@ let text_tratado = [];
 			}
 		}
 		else if(focusedDiv){
-			focusedDiv.textContent = "";
+			focusedDiv.classList.remove('edit');
+
+			if(event.keyCode == 39){ // ArrowLeft
+				focusedDiv = row[nextIndex];
+			}
+			else if(event.keyCode == 37){ // ArrowRight
+				focusedDiv = row[previousIndex];
+			}
+			else{
+				focusedDiv.textContent = "";
+			}
+			focusedDiv.classList.add('edit')
+		}
+
+		else if(focusedDiv){
+			
 		}
 	});
 
@@ -333,3 +349,6 @@ let text_tratado = [];
 	});
 
 });
+
+
+
