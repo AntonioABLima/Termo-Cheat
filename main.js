@@ -1,5 +1,6 @@
 const nome_lista = 'ListaCincoPalavras.txt';
 let lista = [];
+let text_tratado = [];
 
 (async () => {
     try {
@@ -7,6 +8,9 @@ let lista = [];
         const text = await response.text();
 
 		lista = text.split(/[\r\n]+/);
+		lista.forEach(palavra => {
+			text_tratado.push(palavra.normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
+		});
 
         console.log('Arquivo lido com sucesso!');
 
@@ -36,15 +40,44 @@ let lista = [];
 		row.forEach(div => {
 			div.removeEventListener('click', clickHandler);
 		});
-		
+	}
+
+	function keyPressHandler(event) {
+		if (focusedDiv && event.keyCode > 64 && event.keyCode < 91 ) {
+			focusedDiv.textContent = event.key;
+
+			const currentIndex = Array.from(row1).indexOf(focusedDiv);
+			const nextIndex = (currentIndex + 1) % row1.length;
+			focusedDiv.classList.remove('edit');
+			focusedDiv = row1[nextIndex];
+			focusedDiv.classList.add('edit');
+		}
+		else if(focusedDiv){
+			focusedDiv.textContent = "";
+		}
 	}
 
 	const row1 = document.querySelectorAll('.letter.empty');
 	addClickListenerToDivs(row1);
 
 	document.addEventListener('keydown', (event) => {
+		// const row = document.querySelectorAll('.letter.empty');
+		const row = document.querySelectorAll('.letter.empty');
+		
+		const currentIndex = Array.from(row).indexOf(focusedDiv);
+		const nextIndex = (currentIndex + 1) % row.length;
+		const nextDivTxt = row[nextIndex].innerHTML
+
 		if (focusedDiv && event.keyCode > 64 && event.keyCode < 91 ) {
 			focusedDiv.textContent = event.key;
+			focusedDiv.classList.remove('edit');
+			if(nextDivTxt === ''){
+				focusedDiv = row[nextIndex];
+				focusedDiv.classList.add('edit')
+			}
+			else{
+				focusedDiv= null;
+			}
 		}
 		else if(focusedDiv){
 			focusedDiv.textContent = "";
@@ -80,7 +113,6 @@ let lista = [];
 		}
 	}
 
-	
 	addDivButton.addEventListener('click', () => {
 		if(n_row < 5 ){
 			n_row = n_row + 1;
@@ -241,7 +273,7 @@ let lista = [];
 		return novoArray
 	}
 
-	let lista_pre_processada = lista;
+	let lista_pre_processada = text_tratado;
 	function checaPalavra(rows){
 		for (let i = 0; i < rows.length; i += 5) {
 			let map = [];
@@ -287,10 +319,10 @@ let lista = [];
 		respostas_heaging.textContent = 'Total de palavras: ' + lista_resposta.length;
 		let str_final = ""
 		lista_resposta.forEach(word => {
-			str_final = str_final + word + ", ";
+			str_final = str_final + lista[text_tratado.indexOf(word)] + ", ";
 		});
 		respostas.textContent = str_final;
-		lista_pre_processada = lista;
+		lista_pre_processada = text_tratado;
 	})
 
 	const close_resposta = document.getElementById('close-btn');
@@ -301,5 +333,3 @@ let lista = [];
 	});
 
 });
-
-
