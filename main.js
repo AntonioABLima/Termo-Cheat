@@ -89,14 +89,15 @@ let text_tratado = [];
 			else if(event.keyCode == 37){ // ArrowRight
 				focusedDiv = row[previousIndex];
 			}
-			else{
-				focusedDiv.textContent = "";
+			else if(event.keyCode == 8){ // Delete
+				if(focusedDiv.innerHTML == ''){
+					focusedDiv = row[previousIndex];
+				}
+				else{
+					focusedDiv.textContent = "";
+				}
 			}
 			focusedDiv.classList.add('edit')
-		}
-
-		else if(focusedDiv){
-			
 		}
 	});
 
@@ -349,6 +350,4 @@ let text_tratado = [];
 	});
 
 });
-
-
 
