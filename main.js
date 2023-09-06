@@ -304,8 +304,7 @@ let text_tratado = [];
 
 			let green_index_map = detectGreen(map)
 			let yellow_index_map = detectYellow(map)
-			console.log(yellow_index_map.length)
-
+			
 			lista_pre_processada = preProcessing(palavra, map, lista_pre_processada);
 			
 			if(green_index_map.length > 0){
