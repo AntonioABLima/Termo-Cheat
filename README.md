@@ -7,7 +7,7 @@ https://antonioablima.github.io/Termo-Cheat/
 
 ## Manual
 
-![Video](https://github.com/AntonioABLima/Termo-Cheat/blob/main/termo_1.mp4?raw=true)
+![termo_1](https://github.com/AntonioABLima/Termo-Cheat/assets/104531655/93948ba8-bf99-4383-888e-7337d978b26e)
 
 - 1: Digite a palavra de 5 caracteres desejada, sem nenhum acento ('~^ç).
 - 2: Ao clicar no + a palavra é carregada para o programa e uma lova linha de inputs é liberada. Ao clicar no - a ultima linha de inputs e apagada, e é possível editar a linha antiga.
