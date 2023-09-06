@@ -16,4 +16,4 @@ https://antonioablima.github.io/Termo-Cheat/
 - 4: Clique no último botão para ver a lista contendo as possíveis respostas.
 
 ## Obs:
-Atualmente a ferramenta fuinciona 100% para palavras com acentos, e ainda não lida com palavras com letras repetidas. Talvez algumas palavras ainda não estão contidas no arquivo "ListaCincoPalavras.txt", caso você se depare com alguma desta palavra sinta-se livre para adicioná-la.
+Atualmente, a ferramenta funciona 100% para palavras com acentos e ainda não lida com palavras com letras repetidas. Talvez algumas palavras ainda não estejam contidas no arquivo ListaCincoPalavras.txt. Caso você se depare com alguma dessas palavras, sinta-se livre para adicioná-la.
