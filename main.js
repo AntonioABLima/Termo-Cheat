@@ -304,7 +304,7 @@ let text_tratado = [];
 
 			let green_index_map = detectGreen(map)
 			let yellow_index_map = detectYellow(map)
-			
+
 			lista_pre_processada = preProcessing(palavra, map, lista_pre_processada);
 			
 			if(green_index_map.length > 0){
@@ -337,7 +337,11 @@ let text_tratado = [];
 		lista_resposta.forEach(word => {
 			str_final = str_final + lista[text_tratado.indexOf(word)] + ", ";
 		});
-		respostas.textContent = str_final;
+		// respostas.textContent = str_final;
+		respostas.textContent = str_final.slice(0, -2) + '.';
+
+
+		// respostas.textContent = str_final.slice(0, -4) + '.';
 		lista_pre_processada = text_tratado;
 	})
 
@@ -349,4 +353,3 @@ let text_tratado = [];
 	});
 
 });
-
