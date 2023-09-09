@@ -17,3 +17,7 @@ https://antonioablima.github.io/Termo-Cheat/
 
 ## Obs:
 Atualmente, a ferramenta funciona 100% para palavras com acentos e ainda não lida com palavras que contém letras repetidas. Talvez algumas palavras ainda não estejam contidas no arquivo ListaCincoPalavras.txt. Caso você se depare com alguma dessas palavras, sinta-se livre para adicioná-la.
+
+
+### Vídeo do Projeto
+*   [YouTube](https://www.youtube.com/shorts/M5psKcVAEQk)
